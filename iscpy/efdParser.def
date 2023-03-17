@@ -1,0 +1,143 @@
+*>********************************************************************<*
+*>***** Copyright (c) 2005 - 2018 Veryant. Users of isCOBOL      *****<*
+*>***** may freely modify and redistribute this program.         *****<*
+*>********************************************************************<*
+
+       >>SOURCE FORMAT FREE
+       
+01  efd-description.
+  03  efd-version                                pic x    comp-x.
+  03  efd-select-name                            pic x(30).
+  03  efd-filename                               pic x(30).
+  03  efd-filetype                               pic x(10).
+  03  efd-max-record-size                        pic x(4) comp-x.
+  03  efd-min-record-size                        pic x(4) comp-x.
+  03  efd-number-of-keys                         pic x    comp-x.
+  03  efd-number-conditions                      pic xx   comp-x.
+  03  efd-number-fields                          pic xx   comp-x.
+  03  efd-total-number-fields                    pic xx   comp-x.
+  03  efd-total-number-allfields                 pic xx   comp-x.
+  03  efd-key-index                              pic xx   comp-x.
+  03  efd-field-index                            pic xx   comp-x.
+  03  save-efd-field-index                       pic xx   comp-x.
+  03  min-efd-field-index                        pic xx   comp-x.
+  03  max-efd-field-index                        pic xx   comp-x.
+  03  efd-cond-index                             pic xx   comp-x.
+  03  efd-max-field-name-len                     pic xx   comp-x.
+  03  efd-num-key-flds                           pic x    comp-x occurs 120 times.
+
+78  efdmax-segs                                  value 16.
+78  efdMaxNumKeyFields                           value 16.
+
+01 efd-key-description-group.
+    03  efd-key-description.
+        05  efd-number-of-segments               pic 99.
+        05  efd-allow-dup-flag                   pic 9.
+            88  efd-allow-duplicates             value 1 false 0.
+        05  efd-segment-description              occurs efdmax-segs times indexed by efd-seg-idx.
+            07  efd-segment-length               pic x    comp-x.
+            07  efd-segment-offset               pic x(4) comp-x.
+        05  efd-num-of-key-fields                pic x    comp-x.
+        05  efd-key-fields                       occurs efdMaxNumKeyFields times indexed by efd-key-field-idx.
+            07  efd-key-field-name               pic x(30).
+            07  efd-key-field-num                pic xx   comp-x.
+    03  efd-key-index-buf                        pic xx   comp-x.
+
+01  efd-condition-description.
+    03  efd-condition-type                       pic x comp-x.
+        88  efd-equal-condition                  value 1.
+        88  efd-and-condition                    value 2.
+        88  efd-other-condition                  value 3.
+        88  efd-gt-condition                     value 4.
+        88  efd-ge-condition                     value 5.
+        88  efd-lt-condition                     value 6.
+        88  efd-le-condition                     value 7.
+        88  efd-ne-condition                     value 8.
+        88  efd-or-condition                     value 9.
+        88  efd-comparison-condition             values 1, 4 through 8.
+    03  efd-condition-flag                       pic x.
+        88  efd-true-condition                   value 'y' false 'n'.
+    03  efd-other-conditions.
+        05  efd-other-fieldnum                   pic xx comp-x.
+        05  efd-other-fieldname                  pic x(30).
+        05  efd-other-field-val                  pic x(50).
+        05  efd-other-field-nums                 redefines efd-other-field-val.
+            07  efd-cond-val-1                   pic s9(18).
+            07  efd-cond-val-2                   pic s9(18).
+    03  efd-and-conditions                       redefines efd-other-conditions.
+        05  efd-condition-1                      pic xx comp-x.
+        05  efd-condition-2                      pic xx comp-x.
+    03  efd-condition-tablename                  pic x(30).
+
+
+78  efd-NumEdited                                value  0. | Numeric Edited
+78  efd-NumUnsigned                              value  1. | Unsigned numeric
+78  efd-NumSignSep                               value  2. | Signed numeric (trail sep)
+78  efd-NumSigned                                value  3. | Signed numeric (trail comb)
+78  efd-NumSepLead                               value  4. | Signed numeric (lead sep)
+78  efd-NumLeading                               value  5. | Signed numeric (lead comb)
+78  efd-CompSigned                               value  6. | Signed computational
+78  efd-CompUnsigned                             value  7. | Unsigned computational
+78  efd-PackedPositive                           value  8. | Positive packed-decimal
+78  efd-PackedSigned                             value  9. | Signed packed-decimal
+78  efd-PackedUnsigned                           value 10. | Computational-6
+78  efd-BinarySigned                             value 11. | Signed binary
+78  efd-BinaryUnsigned                           value 12. | Unsigned binary
+78  efd-NativeSigned                             value 13. | Signed native-order binary
+78  efd-NativeUnsigned                           value 14. | Unsigned native-order binary
+78  efd-Alphanum                                 value 16. | Alphanumeric
+78  efd-JustAN                                   value 17. | Alphanumeric (justified)
+78  efd-Alphbetic                                value 18. | Alphabetic
+78  efd-JustAlpha                                value 19. | Alphabetic (justified)
+78  efd-AlphaEdited                              value 20. | Alphanumeric Edited
+78  efd-Group                                    value 22. | Group
+78  efd-Flt                                      value 23. | Float or Double
+78  efd-Nat-type                                 value 24. | National
+78  efd-JustNat                                  value 25. | National (justified)
+78  efd-NatEdited                                value 26. | National edited
+78  efd-Wide-type                                value 27. | Wide
+78  efd-JustWide                                 value 28. | Wide (justified)
+78  efd-WideEdited                               value 29. | Wide edited
+78  efd-NativeVSigned                            value 30. | Signed var-len native-order binary
+78  efd-NativeVUnsigned                          value 31. | Unsigned var-len native-order binary            
+
+78  efd-UserDate                                 value 1.    
+78  efd-UserBinary                               value 2.
+78  efd-UserVarLength                            value 3.
+78  efd-SecondaryTable                           value 16.
+78  efd-UnusedBits                               value 480.
+
+01  efd-field-description.
+    03  efd-field-offset                         pic x(4) comp-x.
+    03  efd-field-length                         pic x(4) comp-x.
+    03  efd-field-type                           pic x comp-x.
+        88  efd-signed-field                     values efd-NumSignSep
+                                                        efd-NumSigned
+                                                        efd-NumSepLead
+                                                        efd-NumLeading
+                                                        efd-CompSigned
+                                                        efd-PackedSigned
+                                                        efd-BinarySigned
+                                                        efd-NativeSigned.
+        88  efd-numeric-field                    values efd-NumEdited thru efd-NativeUnsigned.
+        88  efd-float-field                      value  efd-Flt.
+        88  efd-ascii-field                      values efd-Alphanum  thru efd-Group.
+        88  efd-national-field                   values efd-Nat-type  thru efd-NatEdited.
+        88  efd-wide-field                       values efd-Wide-type thru efd-WideEdited.
+    03  efd-field-digits                         pic x(4) comp-x.
+    03  efd-field-scale                          pic s999 comp-4.
+    03  efd-field-dbtype                         pic x(32).
+    03  efd-field-format                         pic x(32).    
+    03  efd-field-user-type                      pic xx comp-x.
+    03  efd-field-condition                      pic xx comp-x.
+    03  efd-field-level                          pic x comp-x.
+    03  efd-field-name                           pic x(30).    
+    03  efd-field-occurs-depth                   pic x comp-x.
+    03  efd-field-occurs-table                   occurs efdMaxNumKeyFields times
+                                                 indexed by efd-field-occurs-level.
+        05  efd-field-occ-max-idx                pic xx comp-x.
+        05  efd-field-occ-offset                 pic xx comp-x.
+    03  efd-field-idx                            pic 9(6).
+    03  efd-buf-field-type                       pic x(30).   
+
+       >>SOURCE FORMAT PREVIOUS     

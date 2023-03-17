@@ -1,0 +1,5 @@
+       01 file-info.
+          02 file-size pic x(8) comp-x.
+          02 file-date pic 9(8) comp-x.
+          02 file-time pic 9(8) comp-x.
+       77 filename     pic x(256).

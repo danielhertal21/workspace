@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<projectDescription>
+	<name>prj</name>
+	<comment></comment>
+	<projects>
+	</projects>
+	<buildSpec>
+		<buildCommand>
+			<name>com.iscobol.plugins.editor.IscobolEditor.IscobolBuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+	</buildSpec>
+	<natures>
+		<nature>com.iscobol.plugins.editor.IscobolEditor.IscobolNature</nature>
+		<nature>com.iscobol.plugins.editor.IscobolEditor.IscobolNatureExt</nature>
+	</natures>
+	<linkedResources>
+		<link>
+			<name>fd</name>
+			<type>2</type>
+			<locationURI>WORKSPACE_LOC/fd</locationURI>
+		</link>
+		<link>
+			<name>fdsl</name>
+			<type>2</type>
+			<locationURI>WORKSPACE_LOC/fdsl</locationURI>
+		</link>
+		<link>
+			<name>output</name>
+			<type>2</type>
+			<locationURI>WORKSPACE_LOC/output</locationURI>
+		</link>
+		<link>
+			<name>resources</name>
+			<type>2</type>
+			<locationURI>WORKSPACE_LOC/resources</locationURI>
+		</link>
+	</linkedResources>
+</projectDescription>
